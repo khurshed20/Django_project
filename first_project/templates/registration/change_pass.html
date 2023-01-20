@@ -1,0 +1,30 @@
+{% extends 'common_code/base.html' %}
+
+<title>{% block title %} Login {% endblock title %}</title>
+
+{% block content %} 
+<h1>Password Modification</h1>
+{% if messages %} {% for message in messages%}
+  <div class="alert alert-primary" role="alert">
+    {{message}}
+  </div> {% endfor %} {% endif %}
+  
+{% if form.errors %}
+<p> Your Old Password is not correct. Please try again </p>
+{% endif %}
+
+<form method="POST", action =" {% url 'password' %}">
+    {% csrf_token %}
+    {{form.as_p}}
+
+    <button name ="submit" >Change Password </button>
+   
+</form>
+
+
+  
+  
+{% endblock content %} 
+
+
+

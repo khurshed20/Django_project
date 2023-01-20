@@ -1,0 +1,37 @@
+{% extends 'common_code/base.html' %}
+
+<title>{% block title %} Login {% endblock title %}</title>
+
+{% block content %} 
+<h1>Login Page</h1>
+{% if messages %} {% for message in messages%}
+<div class="alert alert-primary" role="alert">
+  {{message}} </div>{% endfor %} {% endif %}
+
+{% if form.errors %}
+<p> Your Password and username did not matche. Please try again </p>
+{% endif %}
+
+<form method="POST", action =" {% url 'login' %}">
+    {% csrf_token %}
+    {{form.as_p}}
+
+    <button name ="submit" >Login </button>
+    <input type="hidden" name="next" value="{% url 'topics' %}"/>
+   
+</form>
+ <button> <a href=" {% url 'password_reset' %}">Forget Password<a/> </button>
+  <p><strong>-- OR --</strong></p>
+  <a href="{% url 'social:begin' 'github' %}">Login with GitHub</a><br>
+  <a href="{% url 'social:begin' 'twitter' %}">Login with Twitter</a><br>
+  <a href="{% url 'social:begin' 'facebook' %}">Login with Facebook</a>
+ 
+
+
+
+  
+  
+{% endblock content %} 
+
+
+

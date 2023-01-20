@@ -1,0 +1,42 @@
+{% extends 'common_code/base.html' %}
+{% load static %}
+<title>{% block title %} MACHINE-LEARNING 01 {% endblock title %}</title>
+
+{% block content %} 
+<h1>MACHINE LEARNING 01</h1>
+<p>Machine learning by python .</p>
+ <h2>Course offer</h2>
+  <h4> Name : {{c|upper}} ,String Length : {{c|length}} </h4>
+  <h4> Total Class : {{tc}} </h4>
+  <h4> Seat : {{st}} </h4>
+  <h4> Duration : {{cd}} </h4>
+
+  {% if tc == 20 %}
+  <h6> Course classes 20 </h6>
+  {% elif tc == 25 %}
+  <h6> Course classes 25 </h6>
+  {% else %}
+  <h6> Course classes not defined </h6>
+
+  {% endif %}
+
+  {% for i in no %}
+  {{ forloop.counter}} .  No : {{i}} <br>
+
+  {% endfor %}
+
+  {% for key,value  in dict.items %}
+  <h5>{{ forloop.counter}} . ( Dictionary Items) : {{key}} : {{value}} </h5> 
+
+  {% endfor %}
+  
+  
+
+  <img src="{% static 'image/pexels-pixabay-65894.jpg' %}" alt="logo" />
+
+  {% endblock content %}
+
+  
+
+</body>
+</html>

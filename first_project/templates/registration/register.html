@@ -1,0 +1,31 @@
+{% extends 'common_code/base.html' %}
+{% load crispy_forms_tags %}
+<title>{% block title %} Registration {% endblock title %}</title>
+
+{% block content %} 
+<h1>Sign up  Page</h1>
+{% if messages %} {% for message in messages%}
+<div class="alert alert-primary" role="alert">
+  {{message}}
+</div> {% endfor %} {% endif %}
+
+{% if form.errors %}
+<p> Please enter your correct information  </p>
+{% endif %}
+
+<form method="POST", action =" {% url 'signup' %}">  {% comment %} action =" {% url 'register' %}"  {% endcomment %}
+    {% csrf_token %}
+    {{form|crispy}}
+
+    
+    <input type="hidden" name="next" value="{% url 'topics' %}"/>
+    <button name ="submit" >Sign Up </button>
+</form>
+
+
+  
+
+{% endblock content %} 
+
+
+

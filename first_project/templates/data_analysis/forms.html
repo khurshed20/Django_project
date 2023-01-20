@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+    {% load static %}
+<html>
+<head>
+<title>Student Registration Form</title>
+
+
+<link rel="stylesheet", href="{% static 'css/style1.css' %}" />
+
+
+</head>
+<body>  
+      <form action =" " , method="POST" >
+         {% csrf_token %} 
+         {{ form.as_p }}  {% comment %} Both Label with colon: & input box will show {% endcomment %}
+        
+        <input type="submit" value="submit" />
+
+      </form>
+
+        <p> for  loop </p>
+        {% for field in form %}
+
+        {% comment %} 
+        {{ field.label }} =>  Only Label without colon: will show 
+        {% endcomment %} 
+        {{ field.label_tag }} {% comment %} Only Label with colon: will show {% endcomment %}
+        {{ field }}  {% comment %} Only input box will show {% endcomment %} 
+        <br><br>
+             
+        {% endfor %}
+        <p> end loop </p>
+       
+        {{ form.first_name.label}}  {% comment %} Only Label will show {% endcomment %}<br>
+        {{ form.email.label_tag}}  {% comment %} Only Label with colon : will show {% endcomment %}
+        {{ form.email}}  {% comment %} Only input box will show {% endcomment %}<br>
+        
+        
+      
+      
+
+</body>
+
+</html>

@@ -1,0 +1,23 @@
+{% extends 'common_code/base.html' %}
+{% load crispy_forms_tags %}
+<title>{% block title %} Edit Entry {% endblock title %}</title>
+
+{% block content %} 
+<h1>Edit Page</h1>
+ Entry Id : {{entry.id}}
+ Topic Id : {{topic_id}}
+ 
+ <p><a href="http://127.0.0.1:8000/api/topic/{{topic.id}}"> {{topic.text}}</a></p>
+
+ <form action="{% url 'edit_entry' entry.id %}" method="POST">
+    {% csrf_token %}
+  
+   <P>{{form.as_p}} </p>
+  
+  <button name="submit">Edit Entry </button>
+  
+  
+{% endblock content %} 
+
+
+

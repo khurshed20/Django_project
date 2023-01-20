@@ -1,0 +1,26 @@
+{% extends 'common_code/base.html' %}
+
+<title>{% block title %}Topic Page {% endblock title %}</title>
+
+{% block content %} 
+ {% if messages %} {% for message in messages%}
+  <div class="alert alert-{{message.tags}}" role="alert">
+    {{message}}
+  </div> {% endfor %} {% endif %}
+<h1>{{msg1}}</h1>
+
+{% for i in topic %}
+<p> Topic Id :{{i.id}}</p>
+<p>Topic Date :{{i.date_added}}</p>
+<p> Text :<a href="{% url 'entries' i.id %}">{{i.text|linebreaks}}</a></p>
+
+{% empty %}
+
+<li> {{msg2}} </li>
+
+{% endfor %}
+<p> <a href="{% url 'new_topics' %}"> Add New Topic</a></p>
+{% endblock content %} 
+
+
+

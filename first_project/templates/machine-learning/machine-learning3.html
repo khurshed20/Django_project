@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+{% extends 'common_code/base.html' %}
+
+<title>{% block title %} MACHINE_LEARNING 03 {% endblock title %}</title>
+
+{% block content %} 
+<h1>MACHINE_LEARNING 03 </h1>
+<p>MACHINE_LEARNING  by python .</p>
+ <div> <h3>  TOPIC Displaying by Custom context_precessoes : 'Rest_Api/context_processors/topicComment' </h3>
+
+    {{ TOPIC}}  {{ip}}
+     {{ip.client_ip}}
+    {% for i in  TOPIC %}
+      <p> Id :   {{i.id}} </p> 
+      <p> By  :   {{i.owner}} </p>
+      <p> {{i.text}} </p>
+   {% endfor %}
+ 
+ </div>
+
+{% endblock content %} 
+
+
+
+

@@ -1,0 +1,26 @@
+{% extends 'common_code/base.html' %}
+{% load crispy_forms_tags %}
+<title>{% block title %} New Topic {% endblock title %}</title>
+
+{% block content %} 
+<h5> Add New Topic  </h5>
+
+<form action="{% url 'new_topics' %}" method="POST">
+  {% csrf_token %}
+
+ <P>{{form.as_p}} 
+  
+ </p><br>
+
+
+ <button name="submit">Add Topic </button> </form>
+
+
+{% endblock content %} 
+
+
+{% block script %}
+<script>
+
+</script>
+{% endblock script %}

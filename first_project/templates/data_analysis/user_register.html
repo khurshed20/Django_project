@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+    {% load static %}
+<html>
+<head>
+<title>User Auth Registration Form</title>
+
+
+<link rel="stylesheet", href="{% static 'css/style1.css' %}" />
+
+
+</head>
+<body> 
+    
+      <form action =" " , method="POST" >
+         {% csrf_token %} 
+         {{ form.as_p }}  {% comment %} Both Label with colon: & input box will show {% endcomment %}
+        
+        <input type="submit" value="submit" />
+
+      </form>
+     
+      
+     

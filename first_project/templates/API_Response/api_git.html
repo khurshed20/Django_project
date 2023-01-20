@@ -1,0 +1,42 @@
+{% extends 'common_code/base.html' %}
+{% load static %}
+<title>{% block title %} API PAGE {% endblock title %}</title>
+
+{% block content %} 
+
+ <h1> This is API Related </h1>
+
+   <h4> Name of Keys : {{response_dict.keys}} </h4>
+  <h4> Total Counts : {{response_dict.total_count}} </h4>
+  <h4> Incomplete Results : {{response_dict.incomplete_results}} </h4>
+  {% comment %}
+
+ < <h3> Repository Dict : {{repo_dict}} </h3> 
+  
+ <h6> Items Des : {{response_dict.items}} </h6> 
+
+  {% for i in  repo_dict  %} 
+   
+     <h5> Reposi_Dictionary :  {{ i.keys }} </h5>
+   {% endfor %}   
+   
+{% for keys in repo_dict.keys %}
+
+<h5> KEYS : {{keys}} </h5>
+ {% endfor %}  
+<h5> Reposi_Keys :  {{ repo_dict.0 }} </h5>
+ 
+ {%  endcomment %}
+  <h4 style="color:blue;"> Repo_zero : {{repo_zero}}  </h4>
+
+  <h4 style="color:red;"> Repo_zero_keys_no : {{repo_zero_keys}}  </h4>
+  <h4 style="color:green;"> Repo_zero_keynames : {{repo_zero_keynames}}  </h4>
+   {% for i in  repo_dict  %} 
+   
+     <h5 style="color:orange;"> Reposi_Dictionary Name :  {{ i.name }} </h5>
+     <h5 style="color:violet;"> Reposi_Dictionary Owner :  {{ i.owner }} </h5> 
+     <h5 style="color:magenta;"> Reposi_Dictionary Owner Url:  {{ i.html_url }}
+   {% endfor %} 
+
+   <h3> Figure :</h3> {{  fig}}
+{% endblock content %} 

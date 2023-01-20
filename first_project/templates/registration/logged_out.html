@@ -1,0 +1,14 @@
+{% extends 'common_code/base.html' %}
+
+<title>{% block title %} Logout {% endblock title %}</title>
+
+{% block content %} 
+<h1>Logout Page</h1>
+ 
+
+<p> Your have been logged out. Thanks you for visiting </p>
+
+ <p> <a href="{% url 'topics' %}">Back to Topic </a></p>
+  
+  
+{% endblock content %} 

@@ -1,0 +1,60 @@
+{% extends 'common_code/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+
+
+<title>{% block title %}Record Display {% endblock title %}</title>
+
+{% block content %} <br> 
+ {% comment %} Facebook Like ,Share {% endcomment %}
+ <div class="row">
+   <div class="col-md-4"> {% comment %}" https://developers.facebook.com/docs/plugins/" {% endcomment %}
+    <div class="fb-like" data-href= "http://127.0.0.1:8000/education/record_display/"   data-width=""
+     data-layout="box_count" data-action="like" data-size="large" data-share="true"></div>
+   </div> 
+   <div>
+    {{record.total_likes}}  Peoples likes this post. & 
+     {{record.total_views}}  Peoples viewed this post
+   </div>
+ </div> {% comment %} Like , share end  {% endcomment %}  
+
+<p> User  : {{user}} & ID : {{user.id}} & Email : {{user.email}}</p> 
+
+<p>Display  from custom model function </p> 
+{% for i in record %} 
+<p> Name :  {{i.lowercase}} </p> 
+<p> Subjects : {{i.get_subject_list}} </p>
+<p> Address : {{i.address_short}} </p>
+ 
+{% endfor %}
+
+    {% for i in record %} 
+
+   <p>Record : Id :  {{i.id }}{{id}} Name : {{i.name}} 
+    
+    
+    Group :{{i.group.name}} Subjects :  {{i.subject}}  </p> 
+                     
+    {% endfor %}  
+    <P>Specific User Record   :{% for i in record_user %}   {{ record_user }},  {{i.name}}, , {{i.email}}, {{i.medium}}, subject:  {{i.subject.name }}   {% endfor %}</P> 
+   <p>Subject : {{subject}} </p> 
+   <p>Group : {{group }} </p> 
+   <p>Group _science: {{record_science }} </p> 
+   <p>Group_Math : {{record_math}} </p> 
+   <p>Group_Business : {{record_business}} </p>
+
+   {% comment %} Facebook Comments {% endcomment %}
+   <div class="fb-comments" data-href="http://127.0.0.1:8000/education/record_display/" data-width="" data-numposts="10">
+
+   </div> {% comment %} Facebook Comments  end {% endcomment %}
+    
+  <form action="/education/likepost/{{user.id}}" method="POST" >
+    {% csrf_token %}
+    {% if like %}
+    <button type="submit" class="btb btn-warning" >Unlike </button>
+    {% else %}
+    <button type="submit" class="btb btn-primary" >Like </button>
+    {% endif %}
+   
+{% endblock content %} 

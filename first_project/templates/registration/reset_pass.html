@@ -1,0 +1,25 @@
+{% extends 'common_code/base.html' %}
+
+<title>{% block title %} Reset Password {% endblock title %}</title>
+
+{% block content %} 
+<h1>Mail Id  for Password Reset  </h1>
+
+{% if form.errors %}
+<p> Your Mail Id is Invalid . Please try again </p>
+{% endif %}
+
+<form method="POST", action =" ">
+    {% csrf_token %}
+    {{form.as_p}}
+
+    <button type ="submit" >Submit Email </button>
+    
+   
+</form>
+  
+  
+{% endblock content %} 
+
+
+

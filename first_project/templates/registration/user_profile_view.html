@@ -1,0 +1,40 @@
+{% extends 'common_code/base.html' %}
+
+{% load crispy_forms_tags %}
+
+<title>{% block title %}User Profile {% endblock title %}</title>
+
+{% block content %} 
+ <diV class='container'> 
+                 {{userprofile.user}}
+    <div class="row">
+        <div class="col">
+            <img src=" {{userprofile.image.url}}" class="w-50">
+         </div>
+     </div>
+ </div> 
+ <div class="row">
+    <div class="col">
+        <p>Gender  :{{userprofile.gender}} </P>
+        <p>Birth Date  :{{userprofile.birth_date}} </P>
+            <p>Profession  :{{userprofile.profession}} </P>
+                <p>Group  :{{userprofile.group}} </P>
+                    <p>Phone  :{{userprofile.phone}} </P>
+                        <p>Email  :{{userprofile.email}} </P>
+                            <p>Address  :{{userprofile.address}} </P>
+                            
+                            {% if userprofile.subject_science %} 
+                            <p> Subject  :   
+                           {{userprofile.subject_science}} </P> {% endif %}
+                            {% if userprofile.subject_arts %}  
+                            <p>Subject  :{{userprofile.subject_arts}} </P> {% endif %}  
+                                
+                                {% if userprofile.subject_business %}  
+                            <p>Subject  :{{userprofile.subject_business}} </P>
+                                {% endif %}
+
+     </div>
+ </div>
+</div> 
+
+{% endblock content %} 

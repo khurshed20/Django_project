@@ -1,0 +1,46 @@
+body{
+    background-color: whitesmoke;
+}
+
+p{
+    color:blue;
+    font-weight: 800;
+    font-size: 20;
+}
+img{
+    width:400px;
+    height:200px;
+    
+}
+table{
+    width:600px; 
+    border-width: 3px;
+    border-color: brown;
+}
+table.td { border-width:1px;}
+
+form {
+border :5px solid blue; padding-left: 15px;
+}
+label{
+    font-size: 20px;
+    color:blueviolet;
+}
+input {text-align: center; 
+    height:25px;
+    width:300px;
+    background-color:darkorange;
+}
+textarea {
+    background-color: coral; 
+    width:250px; height:200px
+}
+.captcha {
+    width:130px;
+    height:50px;
+}
+button{
+    border:2px solid blue;
+    width:150px;
+    margin:3px;
+}

@@ -1,0 +1,45 @@
+{% extends 'common_code/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+<title>{% block title %}INDEX PAGE {% endblock title %}</title>
+
+{% block content %} 
+  
+<p> User  : {{User}} & ID : {{User.id}} & Email : {{User.email}}</p> 
+{% if form.is_multipart %}
+    <form enctype="multipart/form-data" method="post" action=" ">
+{% else  %}
+      {% if form %}
+        <form method="post" action=" ">
+      {% endif %}   
+{% endif %}
+
+    {% csrf_token %}
+    {% for i in form %}<br>
+   <p>{{i.label}} {{i}} </p> 
+    {% endfor %} <br>
+  
+    {% if form %}
+       <p>  <input type="submit" value="Submit" /> </p>
+    {% endif %} 
+  </form>
+
+<table width="800px" style="border:2px solid magenta;"> 
+   <tr style="border:2px solid blue;">
+      <th>Sl. No</th><th> Owner</th><th>File Name</th><th>File View </th><th>Download </th>
+  </tr>{% for file in all_files %}
+   <tr> 
+     <td>{{forloop.counter}} </td> 
+     <td>{{file.owner}} </td>
+     <td>{{file.file_name}} </td>
+     <td><a href ="/media/{{file.file}}" >{{file.file}} </a></td>  {% comment %} # OR href="{{ file.file.url }}" {% endcomment %}
+     <td> <a download href ="{{ file.file.url }}"> {{file.file}} </a></td>
+   </tr> {% endfor %}
+
+</table>
+
+ 
+  
+  
+{% endblock content %} 

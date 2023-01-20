@@ -1,0 +1,57 @@
+{% extends 'common_code/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+<title>{% block title %}Company Info by Get Api {% endblock title %}</title>
+
+{% block content %} 
+  
+<p> User  : {% if user.id %} {{user}} & ID : {{user.id}} & Email : {{user.email}} {% else %} Login is required {% endif %}</p> 
+
+
+{% if not token %}
+  <div class=" "> <h2> Get Your Information </h2>
+    <form method="POST" action=" " >
+      {% csrf_token %}
+     <label>Username </label>
+    <input type="text" name="username1" placeholder="Enter username"  style="width:100%;height:30px;" > <br><br>
+    <label>Password</label>
+    <input type="password" name="password1" placeholder="Enter password" style="width:100%;height:30px;" > <br><br>
+    <label>Post Id </label>
+    <input type="number" name="id" placeholder="Enter id" style="width:100%;height:30px;" /> <br><br>
+
+    <p>  <input type="submit" value="Submit" /> </p>
+   
+  </form> 
+   {% endif %}
+
+  {% if token %}
+  <div class="text-center"> <h2> Get  Response </h2>
+     <p> Token : {{token}} </p>
+     <p> Status :  {{response.status}} </p>
+      {% if  response.id %}
+       <div> 
+        <p> Post Id : {{response.id}} </p>
+        <p> Name : {{response.name}} </p>
+        <p> Email : {{response.email}} </p>
+        <p> Address : {{response.address}} </p>
+        <p> Mobile : {{response.mobile}} </p>
+        <p> Company Type : {{response.about}} </p>
+
+       </div>
+      
+       {% else %}
+      {% for i in response.data %}
+     <hr>
+     <p> Post Id :  {{i.id}} </p>
+     <p> Name :  {{i.name}} </p>
+     <p> Email :  {{i.mail}} </p>
+     <p> Address :  {{i.address}} </p>
+     <p> Mobile :  {{i.mobile}} </p>
+     <p> Company Type:  {{i.about}} </p>
+     {% endfor %}
+     {% endif %}
+  </div>
+     {% endif %}
+  
+{% endblock content %} 

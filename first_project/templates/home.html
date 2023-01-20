@@ -1,0 +1,45 @@
+{% extends 'common_code/base.html' %}
+{% load static %}
+<title>{% block title %} HOME PAGE {% endblock title %}</title>
+
+{% block content %} 
+
+ <h1> This is home page </h1>
+
+ <h2>{{stu}} </h2>
+ {% if stu %}
+ <h2> Students Information </h2>
+ {% else %}
+ <h2> Empty DB </h2>
+ {% endif %}
+ <table width="600px" border="2px" >
+  <tr>
+  <th>Name </th>
+  <th>class</th>
+  
+  <th>Email </th>
+ </tr>
+ <tr>
+ {% for i in stu %}
+  <td> {{i.student_name}}</td>
+  <td> {{i.student_class}}</td>
+  <td> {{i.student_email}}</td>
+  
+ </tr>
+ {% endfor %}
+ <table>
+     <h2> SUM : {{ result }}   AND Total : {{sum}} </h2>
+  <form action="add" method="POST"  >
+    {% csrf_token %}
+    NUM1: <input type="text" name="num1" value=" " /> <br>
+    NUM2: <input type="text" name="num2" value=" " /> <br>
+
+    <input type="submit" value="Submit" />
+
+
+  </form>
+   <h3> Name of Keys : {{y.keys}}
+  <h5> Total Counts : {{y.total_count}} </h5>
+  <h5> Incomplete Results : {{y.incomplete_results}} </h5>
+  <h5> Items Des : {{y.items}} </h5>
+{% endblock content %} 

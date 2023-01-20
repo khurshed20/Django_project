@@ -1,0 +1,115 @@
+{% extends 'common_code/base.html' %}
+{% load static %}
+{% load tag %}
+
+
+<title>{% block title %}Post Details Page {% endblock title %}</title>
+
+{% block content %} 
+ {% comment %} Facebook Like ,Share {% endcomment %}
+ <div class="row">
+  <div class="col-md-4"> {% comment %} "https://developers.facebook.com/docs/plugins/"  {% endcomment %}
+   <div class="fb-like" data-href="http://127.0.0.1:8000/education/postdetails/{{object.id}} "data-width=""
+    data-layout="box_count" data-action="like" data-size="large" data-share="true"></div>
+  </div> 
+  <div>
+   {{object.total_likes}}  Peoples likes this post. & 
+    {{object.total_views}}  Peoples viewed this post
+  </div>
+</div> {% comment %} Like , share end  {% endcomment %}  
+
+<p> User  : {% if user.id %} {{user}} & ID : {{user.id}} & Email : {{user.email}}  {% endif %}</p> 
+ <h4> {{msg}} </h4>
+<img src=" /media/{{object.image}}" height='500px' width='800px'  />  
+<p> Name = {{post.name}} </p>
+
+<p style="color:blue;"> Subject = {% for s in post.subject.all %}  {% comment %} # we can write directly 'object' instead of 'post' {% endcomment %}
+   {{s.name}},
+  {% endfor %}  </p> 
+  <p style="color:blue;"> Group = {% for g in object.group.all %}  {% comment %}# we can write 'post' instead of 'object' {% endcomment %}
+    {{g.name}}, 
+   {% endfor %} </p> 
+
+ <p> Category = {{object.category}} </p>
+ <p> Medium = {{object.medium}} </p>
+ {% if request.user == object.user %}
+ <button > <a href="/education/post_edit/{{object.id}}" > Edit Post </a></button>
+ <button > <a href="/education/post_delete/{{object.id}}" > Delete Post </a></button>
+
+   {% endif %}  <br> <br>
+ {% comment %} Facebook Comments {% endcomment %}
+ <div class="fb-comments" data-href="http://127.0.0.1:8000/education/postdetails/{{object.id}}" data-width="" data-numposts="10">
+
+ </div> {% comment %} Facebook Comments  end {% endcomment %}
+ <form action="/education/likepost/{{object.id}}" method="POST" >
+  {% csrf_token %}
+  {% if like %}
+  <button type="submit" class="btn btn-warning" >Unlike </button>
+  {% else %}
+  <button type="submit" class="btn btn-primary" >Like </button>
+  {% endif %}  
+ </form>
+ <diV> 
+  <form action="/education/add_comment/" method="POST" >
+    {% csrf_token %}
+    <label > Comment</label>
+    <input type="text" name="text" />
+    <input type="hidden" name="post_id" value="{{object.id}} "><br>
+    <input type="hidden" name="parent_id" value="{{comments.id}} ">
+
+    <button type="submit" class=" btn btn-primary"> Add Comment </buton>
+
+    </form>
+  </div>  
+    <br>
+    <div>
+      {% for comment in comments %}
+       <p>By : <b> {{comment.user.username}} </b> Dated : {{comment.created_at}} </p>
+     
+      <p> Comment : {{comment.text}} </p>
+     
+    </div>
+
+    <br>
+    <div>
+    <form action="/education/add_comment/" method="POST" >
+      {% csrf_token %}
+      <label > Reply</label>{{comment.id}} 
+      <input type="text" name="text" />
+      <input type="hidden" name="post_id" value="{{object.id}} "><br>
+      <input type="hidden" name="parent_id" value="{{comment.id}} ">
+  
+      <button type="submit" class=" btn btn-primary"> Add Reply </buton>
+      </form>
+    </div>
+    {% endfor %}
+
+     {% comment %}
+       <div>  
+       {% for reply in DictofReply|get_reply:comment.id %}
+        <p>By : <b> {{reply.user.username}} </b> Dated : {{reply.created_at}} </p>
+     
+       <p> Reply : {{reply.text}} </p>
+       {% endfor %}  
+       </div> 
+    {% endcomment %}
+
+        {% for j ,k in DictofReply.items %}
+           {% for i in k %}
+           <p>Reply Id :    {{i.id}} & Reply :  {{i.text}} , Replier :{{i.user}} </P> 
+          <p> Parent _comment Id: {{j}} </p>
+          <p>Replier Image :<img src="{{i.post.image.url}}" />  NOT OK </P> 
+           
+          {% endfor %}
+       
+       {% endfor %} 
+
+     {% comment %}
+    {% for i in comment %}
+     ID : {{i.id}},POST ID : {{i.post.id}} USER : {{i.user}} , parent_comment ID : {{i.parent_comment.id}}--PARENT USER :{{i.parent_comment.user}}--PARENT TEXT :{{i.parent_comment.text}}---PARENT POST :{{i.parent_comment.post}}
+     {% endfor %}
+
+     {% endcomment %} 
+
+{% endblock content %} 
+

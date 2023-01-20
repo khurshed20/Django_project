@@ -1,0 +1,70 @@
+{% extends 'common_code/base.html' %}
+
+<title>{% block title %} Data Entry {% endblock title %}</title>
+
+{% block content %} 
+<h5>Topic Id : {{topic.id}}</h5>
+<h1>Topic : {{topic}}</h1>
+<p>
+    <a href="{% url 'new_entries' topic.id %}">Add New Entry</a>
+</p>
+{% for i in entry %}
+<p>Entry Id : {{i.id}}</p>
+<p>Date : {{i.date_added}}</p>
+
+<p>{{i.text|linebreaks}}</p>
+
+<p><a href="{% url 'comment_entry' entry_id=i.id topic_id=topic.id %}">Add Comment</a></p>
+<p><a href="{% url 'edit_entry' entry_id=i.id  %}">Edit Entry</a></p>
+
+{% empty %}
+
+<li> No entry has been added yet </li>
+
+{% endfor %}
+<p>Total objects : {{length}}</p>
+
+  <p>   Id_entry : {{entry_id}} 
+   
+</p>  
+ <p> COMMENT OBJECT :{% for i in comment %} </p>
+                             <h5> Comment Data Table Iteration  </p>
+                              <p>1. Column Name  :  topic_entry <p>
+                             <p>1.1 Topic : {{i.topic_entry.topic}} </p>
+                             <p>1.2 Entry : {{i.topic_entry.text}} </p>
+                             <p>1.3 Entry Date {{i.topic_entry.date_added}} </p>
+                             <h5>
+                             <p>2. Column Name : Comment Id : {{i.id}} </p>
+                             <p>3. Column Name : Commentor : {{i.commenter}} </p>
+                             <p>4. Column Name : Comment : {{i.text}} </p>
+                            
+                             
+                      {% endfor %}  
+                     
+            
+     <p> Entry Id : {{entry_id}} </p>
+       
+        
+     <p> Topic Entery Text : {{entry_text}} </p>
+   
+   
+<p> Comment Id : {{comment_id}}</p>
+<p> Commenter : {{commenter}}
+<p> Comment Text : {{comment_text}}</p>
+<p>{% for i ,j in xyz %}
+     
+                  
+               
+                    <p>Entry ID : {{i}}    </p>
+                    {% for k , l in j %}
+                          <p> Entry :  {{k}}   </p>
+                              {% for a in l %}
+                          <p> Comment :  {{a}} </p>
+                              {% endfor %}
+                    {% endfor %}
+   {% endfor %}    
+  <p> COMMENT : {{zipped}}
+{% endblock content %} 
+
+
+
